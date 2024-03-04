@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 //عايز اقلل الكود ابقي شوف ازاي نعملها علي دي
@@ -17,10 +18,14 @@ interface ProductProps {
 
 function Product({ product }: ProductProps) {
 
-    // const navigate = 
+    const router = useRouter()
+
+    function navigate (){
+        router.push(`productinfo/${product.id}`)
+    }
 
     return (
-        <div className='border' >
+        <div className='border cursor-pointer' onClick={()=> navigate(product.id)}>
 
 
                 <p>love</p>
