@@ -1,42 +1,37 @@
-import React from 'react'
+'use client'
+import CartProduct from '@/components/CartProduct';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 function page() {
-  return (
-    <div className='p-4'>
 
-      <div className='p-4 bg-white '>
+  const selectedProduct = useSelector((state) => state.cart.products)
+
+  const [cartProduct, setCartProducts] = useState([])
+
+  function theProducts() {
+    setCartProducts(selectedProduct)
+  }
+
+  useEffect(() => {
+    theProducts()
+  }, [cartProduct, selectedProduct])
+
+  return (
+    <>
+
+      <div className='m-6 p-6 bg-white'>
 
         <div className='flex border-b-2 border-gray-300 justify-between pb-2'>
-          <h1 className='text-xl'>Shopping Cart</h1>
+          <h1 className='text-2xl font-semibold'>Shopping Cart < ShoppingCartOutlinedIcon/></h1>
           <h1 className='self-end'>Price</h1>
         </div>
-
-        <div className='products p-4'>
-
-          <div className='border flex justify-between p-4'>
-
-            <div className='flex  gap-4'>
-
-              <p>product image</p>
-
-              <div>
-
-                <p>product title</p>
-
-                <div className='flex gap-4'>
-                  <p>quantity</p>
-                  <p>delete</p>
-                  <p>add to wish list</p>
-                </div>
-
-              </div>
-
-            </div>
-
-            <span>product price</span>
+        {cartProduct.map((CProduct) => (
+          <div key={CProduct.id}>
+            <CartProduct CProduct={CProduct} />
           </div>
-
-        </div>
+        ))}
 
         <div className='flex flex-row-reverse  border-t-2  pt-1'>
           <p className='  '> subtotal: sub price</p>
@@ -44,7 +39,7 @@ function page() {
 
       </div>
 
-    </div>
+    </>
   )
 }
 

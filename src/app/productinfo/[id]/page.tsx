@@ -45,6 +45,7 @@ function page() {
                 <div>
                     <img
                     src={product.image}
+                    className=' w-auto h-auto'
                     alt='product image'
                     />
                 </div>

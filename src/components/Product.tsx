@@ -1,6 +1,11 @@
+import { addToCart } from '@/redux/slices/cartSlice';
+import { addToWish } from '@/redux/slices/wishListSlice';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 //عايز اقلل الكود ابقي شوف ازاي نعملها علي دي
 interface ProductProps {
@@ -20,32 +25,47 @@ function Product({ product }: ProductProps) {
 
     const router = useRouter()
 
-    function navigate (){
+    function navigate() {
         router.push(`productinfo/${product.id}`)
     }
 
+    const dispatch = useDispatch()
+    function addProductCart() {
+        dispatch(addToCart(product))
+    }
+
+    const wishList = useSelector((state)=> state.wishList.wishList)
+    function addWish(){
+        dispatch(addToWish(product))
+    }
+
     return (
-        <div className='border cursor-pointer' onClick={()=> navigate(product.id)}>
+        <div className='bg-white' >
 
 
-                <p>love</p>
+            <p className='p-4 absolute' onClick={addWish}><FavoriteBorderOutlinedIcon/></p>
 
-                <div className='text-center'>
-                    <img
-                        src={product.image}
-                    />
+            <div className='p-4  cursor-pointer ' onClick={() => navigate(product.id)} >
+                <img
+                    className='object-contain w-52 h-52 mx-auto '
+                    src={product.image}
+                    alt='product image'
+                />
 
-                    <p>{product.title}</p>
+                <p className='font-semibold text-center line-clamp-1'>{product.title}</p>
 
-                    <p>voters:{product.rating.count}</p>
-                    <p>rate:{product.rating.rate}</p>
+                <p className='pt-2'>voters:{product.rating.count}</p>
+                <p>rate:{product.rating.rate}</p>
+                <p className='font-bold'>price: {product.price} $</p>
 
-                </div>
+            </div>
 
-
-                <button className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 '>
-                    add to cart
+            <p className='text-center pb-5'>
+                <button className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 px-20  ' onClick={addProductCart}>
+                     <ShoppingCartOutlinedIcon/> add to cart
                 </button>
+
+            </p>
 
         </div>
     )
