@@ -34,8 +34,8 @@ function Product({ product }: ProductProps) {
         dispatch(addToCart(product))
     }
 
-    const wishList = useSelector((state)=> state.wishList.wishList)
-    function addWish(){
+    const wishList = useSelector((state) => state.wishList.wishList)
+    function addWish() {
         dispatch(addToWish(product))
     }
 
@@ -43,7 +43,7 @@ function Product({ product }: ProductProps) {
         <div className='bg-white' >
 
 
-            <p className='p-4 absolute' onClick={addWish}><FavoriteBorderOutlinedIcon/></p>
+            <p className='p-4 absolute' onClick={addWish}><FavoriteBorderOutlinedIcon /></p>
 
             <div className='p-4  cursor-pointer ' onClick={() => navigate(product.id)} >
                 <img
@@ -60,9 +60,9 @@ function Product({ product }: ProductProps) {
 
             </div>
 
-            <p className='text-center pb-5'>
-                <button className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 px-20  ' onClick={addProductCart}>
-                     <ShoppingCartOutlinedIcon/> add to cart
+            <p className='text-center px-3 pb-5'>
+                <button className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 w-full ' onClick={addProductCart}>
+                    <ShoppingCartOutlinedIcon /> add to cart
                 </button>
 
             </p>

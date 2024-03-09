@@ -5,6 +5,7 @@ import Image from 'next/image'
 import logo from '../../../public/logo.png'
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import { signInWithE_PW } from '../../../firebase/auth';
+import Link from 'next/link';
 // import Cookies from 'js-cookie';
 
 function page() {
@@ -29,21 +30,9 @@ function page() {
         }
     }
 
-    const handleSignOut = () => {
-
-        setIsSignin(false)
-    }
-
     return (
-        <div>
-            <Image
-                className='mx-auto m-4'
-                src={logo}
-                alt='logo'
-                width={100}
-                height={30}
-                onClick={() => router.push('/')}
-            />
+        <div className=' mt-16 '>
+
             <Formik
                 initialValues={{ email: '', password: '' }}
                 validate={(values) => {
@@ -99,17 +88,18 @@ function page() {
 
                         </div>
                     </Form>
-                    <p className='text-center'>new to shopHub ?</p>
-                    <button className='border shadow rounded w-full'>create yor shopHub account</button>
+                    <p className='text-center my-3'>new to shopHub ?</p>
+                    <div className=' text-center my-3'>
+                        <Link href={'/signup'} className='bg-white rounded-md p-2 hover:bg-black hover:text-white transition duration-300 shadow w-full'>create yor shopHub account</Link>
+                    </div>
                 </div>
 
-
             </Formik>
-            <div className='footer border-t text-center'>
 
-                <p>© 1996-2023, shopHub.com, Inc.</p>
+            <div className='footer border-t text-center mt-auto fixed bottom-0 w-full p-2'>
+                <p>© 1996-2024, shopHub.com, Inc.</p>
             </div>
-            <button onClick={handleSignOut}>Sign Out</button>
+
         </div>
     )
 }

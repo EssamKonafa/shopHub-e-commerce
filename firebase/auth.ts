@@ -1,5 +1,5 @@
 import { auth } from './firebase'
-import { createUserWithEmailAndPassword, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updatePassword } from '@firebase/auth'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, updatePassword,signOut } from '@firebase/auth'
 
 export const createUSer = async (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -23,8 +23,14 @@ export const signInWithGoogle = async () => {
     return result
 }
 
-export const signOut = () => {
-    return auth, signOut()
+export const handleSignOut = async() => {
+    try{
+        await signOut(auth)
+        console.log('user signed out successfully');
+    }catch(err){
+        console.log('error in signing out',err);
+        
+    }
 }
 
 export const passwordReset = (email) => {

@@ -1,35 +1,86 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../public/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import LoyaltyOutlinedIcon from '@mui/icons-material/LoyaltyOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-// import { useAuth } from '@/context/authContext'
-import {useAuth} from '../context/authContext'
+import { useAuth } from '../context/authContext'
+import { handleSignOut } from '../../firebase/auth'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { useRouter } from 'next/navigation'
 
 function Header() {
-    // const {userLogged}=useAuth()
-    // const [userName, setUserName] = useState('');
 
-    // useEffect(() => {
-    //   // Listen for changes in authentication state
-    //   if (currentUser) {
-    //     setUserName(currentUser.displayName || currentUser.email);
-    //   } else {
-    //     setUserName('');
-    //   }
-    // }, [currentUser]);
-    // console.log(userLogged);
-    
-    
+
+    const { currentUser } = useAuth()
+
     const selectedProduct = useSelector((state) => state.cart.products)
-    const wishList = useSelector((state)=>state.wishList.wishList)
+    const wishList = useSelector((state) => state.wishList.wishList)
+
+    const [searchIndex, setSearchIndex] = useState('')
+    const [searchResult, setSearchResult] = useState([])
+    const [isInputFocused, setIsInputFocused] = useState(false);
+    const [loader, setLoader] = useState(true)
+
+    function handleSearchChange(event) {
+        setSearchIndex(event.target.value)
+    }
+
+    async function searchHandling() {
+        try {
+            const response = await fetch(`https://fakestoreapi.com/products/?search=${searchIndex}`)            
+            const result = await response.json()
+            setSearchResult(result)
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoader(false)
+        }
+    }
+
+    const router = useRouter() 
+
+    function handleResultNavigate(id){
+        router.push(`productinfo/${id}`)
+    }
+
+    useEffect(() => {
+        if(searchIndex.length>0){
+            searchHandling()
+        }
+    }, [searchIndex])
 
     return (
         <>
-            <header className='bg-white shadow-md flex p-5 justify-between items-center'>
+            <header className='bg-white shadow-md flex p-4 justify-between items-center '>
+
+                <div>
+                    <input
+                        type='text'
+                        placeholder=' search...'
+                        className='border-b border-gray-500 rounded-xl p-2 pl-7 focus:bg-gray-100'
+                        value={searchIndex}
+                        onChange={handleSearchChange}
+                        onFocus={() => setIsInputFocused(true)}
+                        onBlur={() => setIsInputFocused(false)}
+                    />
+                    <div className='absolute top-7 mt-0.5 pl-1 text-center'>
+                        <SearchOutlinedIcon className='text-gray-700 text-center' />
+                    </div>
+                    {isInputFocused && (
+                        <div className='absolute bg-gray-100 shadow-xl  gap-5 p-2 max-w-64  rounded-xl mb-2'>
+                            {searchResult.slice(0, 3).map((result) => (
+                                <div key={result.id} className='flex border rounded-md items-center gap-4 m-2 p-2 cursor-pointer' onClick={()=>handleResultNavigate(result.id)}  >
+                                    <img src={result.image} className='w-50 h-10' alt={result.title} />
+                                    <p className='line-clamp-1  '>{result.title}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    
+                </div>
 
                 <div>
                     <Link href={'/'}>
@@ -38,22 +89,49 @@ function Header() {
                             width={200}
                             height={50}
                             alt='logo'
+                            className='w-40 h-8'
                         />
                     </Link>
                 </div>
 
-                <div>
-                    <input
-                        type='text'
-                        placeholder=' search...'
-                        className='border-b-2'
-                    />
-                </div>
+                <div className='flex gap-4 items-center'>
 
-                <div className='flex gap-2'>
-                    <Link href={'/user'}>hello user</Link>
-                    <Link href={'/wishlist'}><LoyaltyOutlinedIcon/>WishList{wishList.length}</Link>
-                    <Link href={'/cart'}><ShoppingCartOutlinedIcon/>Cart{selectedProduct.length}</Link>
+                    <div className='text-sm font-semibold'>
+                        {currentUser ?
+                            (<>
+                                <div className=''>
+                                    <p>
+
+                                Hello, {currentUser.email.length > 5 ? `${currentUser.email.substring(0, 5)}` : currentUser.email}
+                                    </p>
+                                    <button onClick={() => handleSignOut()}>sign out</button>
+                                </div>
+                            </>)
+                            :
+                            (<>
+                                <div>
+                                    <p>Hello</p>
+                                    <Link href={'/signin'}>sign in</Link>
+                                </div>
+                            </>)}
+                    </div>
+
+                    <div className='flex text-center font-semibold text-sm gap-4 '>
+                        <Link href={'/wishlist'} >
+                            <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3 bg-blue-400'>{wishList.length}</p>
+                            <LoyaltyOutlinedIcon style={{ fontSize: '35', marginLeft: '10px' }} />
+                            <p>WishList</p>
+                        </Link>
+
+                        {/* top-2 right-7 */}
+
+                        <Link href={'/cart'}  >
+                            <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3  bg-blue-400 '>{selectedProduct.length}</p>
+                            <ShoppingCartOutlinedIcon style={{ fontSize: '35', marginLeft: '11px' }} />
+                            <p>Cart</p>
+                        </Link>
+                    </div>
+
                 </div>
 
             </header>

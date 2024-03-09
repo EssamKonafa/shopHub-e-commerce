@@ -9,7 +9,7 @@ function Products() {
 
     return (
         <>
-            <div className='grid grid-cols-4 gap-12 p-12 '>
+            <div className='grid grid-cols-5 gap-12 p-12 '>
                 {products.map((product) => (
                     <div key={product.id}>
                         <Product product={product}/>

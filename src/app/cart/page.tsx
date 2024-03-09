@@ -20,25 +20,47 @@ function page() {
 
   return (
     <>
-
       <div className='m-6 p-6 bg-white'>
-
         <div className='flex border-b-2 border-gray-300 justify-between pb-2'>
-          <h1 className='text-2xl font-semibold'>Shopping Cart < ShoppingCartOutlinedIcon/></h1>
+          <h1 className='text-2xl font-semibold'>
+            {cartProduct.length > 0 ? (
+              <>Shopping Cart <ShoppingCartOutlinedIcon /></>
+            ) : (
+              <>Your Cart is Empty</>
+            )}
+          </h1>
           <h1 className='self-end'>Price</h1>
         </div>
-        {cartProduct.map((CProduct) => (
-          <div key={CProduct.id}>
-            <CartProduct CProduct={CProduct} />
+
+        {cartProduct.length > 0 ? (
+          cartProduct.map((CProduct) => (
+            <div key={CProduct.id}>
+              <CartProduct CProduct={CProduct} />
+            </div>
+          ))
+        ) : (
+          <div className='flex justify-center items-center border-t-2 pt-4'>
+            <p>add some products and have fun.</p>
           </div>
-        ))}
+        )}
 
-        <div className='flex flex-row-reverse  border-t-2  pt-1'>
-          <p className='  '> subtotal: sub price</p>
-        </div>
+        {cartProduct.length > 0 && (
+          <>
+            <div className='flex flex-row-reverse border-t-2 pt-1'>
+              <p className='  '>subtotal: sub price</p>
+            </div>
 
+            <div className='flex flex-row-reverse p-2'>
+              <button
+                role='link'
+                className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 '
+              >
+                proceed to checkout
+              </button>
+            </div>
+          </>
+        )}
       </div>
-
     </>
   )
 }

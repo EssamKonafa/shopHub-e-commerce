@@ -7,6 +7,8 @@ import { useFormik } from "formik"
 import { useRouter } from 'next/navigation'
 import { createUSer, } from '../../../firebase/auth'
 import Header from '@/components/Header'
+import RootLayout from '../layout'
+import Link from 'next/link'
 
 function page() {
 
@@ -51,19 +53,10 @@ function page() {
 
     return (
         <>
-        {/* {headerDisplay && <Header />} */}
             <div className='max-w-md mx-auto'>
-                <Image
-                    className='mx-auto m-4'
-                    src={logo}
-                    alt='logo'
-                    width={100}
-                    height={30}
-                    onClick={() => router.push('/')}
-                />
 
                 <form onSubmit={formik.handleSubmit}>
-                    <div className='border bg-white rounded-md p-4 '>
+                    <div className='border bg-white rounded-md p-4 mt-10'>
                         <h1 className='font-bold mb-3 text-xl'>Create account</h1>
 
                         <div className='mb-2'>
@@ -120,19 +113,17 @@ function page() {
                             </div>
                         </div>
 
-                        <button className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 px-20p-1.5 w-full' type='submit'>Continue</button>
+                        <button className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 px-20p-1.5 w-full mt-3' type='submit'>Continue</button>
                         
-                        <hr className='border' />
-
-                        <div>
-                            Already have an account? Sign in
+                        <div className='mt-3'>
+                            Already have an account? <Link className=' hover:text-blue-600 hover:font-bold font-semibold ' href='/signin'>Sign in</Link>
                         </div>
                         
                     </div>
                 </form>
             </div>
 
-            <div className='footer border-t text-center'>
+            <div className='footer border-t text-center mt-auto fixed bottom-0 w-full p-2'>
                 <p>©2024, shopHub.com, Inc.</p>
             </div>
         </>
