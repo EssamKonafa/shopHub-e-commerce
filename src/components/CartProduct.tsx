@@ -31,8 +31,8 @@ function CartProduct({ CProduct }) {
 
                             <p className='font-bold'>{CProduct.title}</p>
 
-                            <div className='flex gap-4'>
-                                <p><FormatListNumberedIcon/>quantity</p>
+                            <div className='flex gap-4 pt-2'>
+                                {/* <p><FormatListNumberedIcon/>quantity</p> */}
                                 <button onClick={()=> removeProduct(CProduct.id)}><DeleteForeverOutlinedIcon/>delete</button>
                                 <p><LoyaltyOutlinedIcon/>add to wishlist</p>
                             </div>

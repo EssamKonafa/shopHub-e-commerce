@@ -30,7 +30,7 @@ function Header() {
 
     async function searchHandling() {
         try {
-            const response = await fetch(`https://fakestoreapi.com/products/?search=${searchIndex}`)            
+            const response = await fetch(`https://fakestoreapi.com/products/?search=${searchIndex}`)
             const result = await response.json()
             setSearchResult(result)
         } catch (err) {
@@ -40,71 +40,74 @@ function Header() {
         }
     }
 
-    const router = useRouter() 
+    const router = useRouter()
 
-    function handleResultNavigate(id){
+    function handleResultNavigate(id) {
         router.push(`productinfo/${id}`)
     }
 
     useEffect(() => {
-        if(searchIndex.length>0){
+        if (searchIndex.length > 0) {
             searchHandling()
         }
     }, [searchIndex])
 
     return (
         <>
-            <header className='bg-white shadow-md flex p-4 justify-between items-center '>
+            <header className='bg-white shadow-md flex p-2'>
 
-                <div>
-                    <input
-                        type='text'
-                        placeholder=' search...'
-                        className='border-b border-gray-500 rounded-xl p-2 pl-7 focus:bg-gray-100'
-                        value={searchIndex}
-                        onChange={handleSearchChange}
-                        onFocus={() => setIsInputFocused(true)}
-                        onBlur={() => setIsInputFocused(false)}
-                    />
-                    <div className='absolute top-7 mt-0.5 pl-1 text-center'>
-                        <SearchOutlinedIcon className='text-gray-700 text-center' />
+                <div className='lg:w-9/12 justify-between    md:w-10/12  md:flex flex-row-reverse  '>
+
+                    <div className=' self-end sm: pb-2'>
+                        <Link href={'/'}>
+                            <Image
+                                src={logo}
+                                width={200}
+                                height={50}
+                                alt='logo'
+                                className='w-40 h-8'
+                            />
+                        </Link>
                     </div>
-                    {isInputFocused && (
-                        <div className='absolute bg-gray-100 shadow-xl  gap-5 p-2 max-w-64  rounded-xl mb-2'>
-                            {searchResult.slice(0, 3).map((result) => (
-                                <div key={result.id} className='flex border rounded-md items-center gap-4 m-2 p-2 cursor-pointer' onClick={()=>handleResultNavigate(result.id)}  >
-                                    <img src={result.image} className='w-50 h-10' alt={result.title} />
-                                    <p className='line-clamp-1  '>{result.title}</p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    
-                </div>
 
-                <div>
-                    <Link href={'/'}>
-                        <Image
-                            src={logo}
-                            width={200}
-                            height={50}
-                            alt='logo'
-                            className='w-40 h-8'
+                    <div className='my-auto'>
+                        <input
+                            type='text'
+                            placeholder=' search...'
+                            className='border-b border-gray-500 rounded-xl p-2 pl-7 focus:bg-gray-100'
+                            value={searchIndex}
+                            onChange={handleSearchChange}
+                            onFocus={() => setIsInputFocused(true)}
+                            onBlur={() => setIsInputFocused(false)}
                         />
-                    </Link>
+                        <div className='lg:absolute top-4 mt-0.5 pl-1 text-center md:absolute sm:absolute sm:top-5 xs:absolute  xs:top-14 '>
+                            <SearchOutlinedIcon className='text-gray-700 text-center ' />
+                        </div>
+                        {isInputFocused && (
+                            <div className='absolute bg-gray-100 shadow-xl  gap-5 p-2 max-w-64  rounded-xl mb-2'>
+                                {searchResult.slice(0, 3).map((result) => (
+                                    <div key={result.id} className='flex border rounded-md items-center gap-4 m-2 p-2 cursor-pointer' onClick={() => handleResultNavigate(result.id)}  >
+                                        <img src={result.image} className='w-50 h-10' alt={result.title} />
+                                        <p className='line-clamp-1  '>{result.title}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
                 </div>
 
-                <div className='flex gap-4 items-center'>
+                <div className='flex gap-4 items-center self-end md:w-7/12 sm:w-9/12 xs:w-9/12 justify-end  ' >
 
-                    <div className='text-sm font-semibold'>
+                    <div className='text-sm font-semibold pl-2'>
                         {currentUser ?
                             (<>
                                 <div className=''>
                                     <p>
 
-                                Hello, {currentUser.email.length > 5 ? `${currentUser.email.substring(0, 5)}` : currentUser.email}
+                                        Hello, {currentUser.email.length > 5 ? `${currentUser.email.substring(0, 5)}` : currentUser.email}
                                     </p>
-                                    <button onClick={() => handleSignOut()}>sign out</button>
+                                    <button onClick={() => handleSignOut()}><p className='hover:text-red-600'>sign out</p></button>
                                 </div>
                             </>)
                             :
@@ -126,7 +129,7 @@ function Header() {
                         {/* top-2 right-7 */}
 
                         <Link href={'/cart'}  >
-                            <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3  bg-blue-400 '>{selectedProduct.length}</p>
+                            <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3 bg-blue-400 '>{selectedProduct.length}</p>
                             <ShoppingCartOutlinedIcon style={{ fontSize: '35', marginLeft: '11px' }} />
                             <p>Cart</p>
                         </Link>

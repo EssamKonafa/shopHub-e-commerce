@@ -22,7 +22,7 @@ function Page() {
             <div className=' text-center w-full'>
                 <h1 className='text-3xl font-semibold my-2'>WishList</h1>
 
-                <div className='grid grid-cols-6 gap-4'>
+                <div className='grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-4'>
                     {wish.length > 0 ? (
                         wish.map((wishes) => (
                             <div key={wishes.id}>
@@ -30,8 +30,8 @@ function Page() {
                             </div>
                         ))
                     ) : (
-                        <div className=" absolute text-center right-96 m-60 font-bold">
-                            <p>There are no wish products yet.</p>
+                        <div className="w-full mx-full text-center font-bold">
+                            <p >There are no wish products yet.</p>
                         </div>
                     )}
                 </div>
