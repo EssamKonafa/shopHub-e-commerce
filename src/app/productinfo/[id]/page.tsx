@@ -8,30 +8,27 @@ import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Link from 'next/link'
 
-interface ProductInfo {
-    product: {
-        id: number,
-        title: string,
-        image: string
-        category: string,
-        description: string,
-        price: number,
-        rating: { rate: number; count: number },
-    }
-}
-
-interface ProductInfoProps {
-    product: ProductInfo
-}
+// interface ProductInfo {
+//     product: {
+//         id: number,
+//         title: string,
+//         image: string
+//         category: string,
+//         description: string,
+//         price: number,
+//         rating: { rate: number; count: number },
+//     }
+// }
 
 function page() {
 
     const params = useParams()
     const id = params.id
 
-    const [product, setProduct] = useState<ProductInfo | {}>({})
-    const [loader, setLoader] = useState<boolean>(true)
+    const [product, setProduct] = useState({})
+    const [loader, setLoader] = useState(true)
 
     const getProductInfo = async () => {
         try {
@@ -46,7 +43,7 @@ function page() {
     }
 
     const dispatch = useDispatch()
-    function addProductCart(product: ProductInfo) {
+    function addProductCart(product) {
         dispatch(addToCart(product))
         showAlert()
     }
@@ -58,10 +55,12 @@ function page() {
         })
     }
 
+
+
     const showStars = () => {
         const stars = [];
         const totalStars = 5;
-        const fullStars = Math.min(Math.floor(product.rating?.rate || 0), totalStars);
+        const fullStars = Math.min(Math.floor(product.rating.rate), totalStars);
 
         for (let i = 0; i < totalStars; i++) {
             if (i < fullStars) {
@@ -94,7 +93,7 @@ function page() {
 
     return (
         <>
-
+                
             <div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 p-5 bg-white m-5 shadow-md mb-20'>
 
                 <div className='mx-auto'>
