@@ -89,7 +89,7 @@ function Header() {
                             onFocus={() => setIsInputFocused(true)}
                             onBlur={() => setIsInputFocused(false)}
                         />
-                        <div className='lg:absolute top-4 mt-0.5 pl-1 text-center md:absolute sm:absolute sm:top-5 xs:absolute  xs:top-14 '>
+                        <div className='lg:absolute top-4 mt-0.5 pl-1 text-center md:absolute sm:absolute sm:top-5 xs:absolute  xs:top-14 xxs:absolute  xxs:top-14   xxxs:absolute  xxxs:top-14 '>
                             <SearchOutlinedIcon className='text-gray-700 text-center ' />
                         </div>
                         {isInputFocused && (
@@ -108,40 +108,54 @@ function Header() {
 
                 <div className='flex gap-4 items-center self-end md:w-7/12 sm:w-9/12 xs:w-9/12 justify-end  ' >
 
-                    <div className='text-sm font-semibold pl-2'>
-                        {currentUser ?
-                            (<>
-                                <div className=''>
-                                    <p>
 
-                                        Hello, {currentUser.email.length > 5 ? `${currentUser.email.substring(0, 5)}` : currentUser.email}
-                                    </p>
-                                    <button onClick={() => handleSignOut().then(()=>showAlert())}><p className='hover:text-red-600'>sign out</p></button>
-                                </div>
-                            </>)
-                            :
-                            (<>
-                                <div>
-                                    <p>Hello</p>
-                                    <Link className='hover:text-blue-600' href={'/signin'}>sign in</Link>
-                                </div>
-                            </>)}
-                    </div>
 
-                    <div className='flex text-center font-semibold text-sm gap-4 '>
-                        <Link href={'/wishlist'} >
-                            <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3 bg-blue-400'>{wishList.length}</p>
-                            <LoyaltyOutlinedIcon style={{ fontSize: '35', marginLeft: '10px' }} />
-                            <p>WishList</p>
-                        </Link>
+                    <div className=' text-center font-semibold gap-4 md:flex flex-row text-xs md:mx-10'>
 
-                        {/* top-2 right-7 */}
 
-                        <Link href={'/cart'}  >
-                            <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3 bg-blue-400 '>{selectedProduct.length}</p>
-                            <ShoppingCartOutlinedIcon style={{ fontSize: '35', marginLeft: '11px' }} />
-                            <p>Cart</p>
-                        </Link>
+                    <div>
+                            <div className='text-sm font-semibold pl-2 '>
+                                {currentUser ?
+                                    (<>
+                                        <div className=''>
+                                            <p>
+
+                                                Hello, {currentUser.email.length > 5 ? `${currentUser.email.substring(0, 5)}` : currentUser.email}
+                                            </p>
+                                            <button onClick={() => handleSignOut().then(() => showAlert())}><p className='hover:text-red-600'>sign out</p></button>
+                                        </div>
+                                    </>)
+                                    :
+                                    (<>
+                                        <div className=''>
+                                            <p>Hello</p>
+                                            <div>
+                                            <Link className='hover:text-blue-600' href={'/signin'}>sign in</Link>
+                                            </div>
+                                        </div>
+                                    </>)}
+                            </div>
+                        </div>
+
+
+                        <div >
+                            <Link href={'/wishlist'} >
+                                <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3 bg-blue-400'>{wishList.length}</p>
+                                <LoyaltyOutlinedIcon style={{ fontSize: '35', marginLeft: '10px' }} />
+                                <p className='hidden sm:block'>WishList</p>
+                            </Link>
+                        </div>
+
+                        <div>
+                            <Link href={'/cart'}  >
+                                <p className='absolute border border-black rounded-3xl flex justify-center items-center p-2 w-3 h-3 bg-blue-400 '>{selectedProduct.length}</p>
+                                <ShoppingCartOutlinedIcon style={{ fontSize: '35', marginLeft: '11px' }} />
+                                <p className='hidden sm:block'>Cart</p>
+                            </Link>
+                        </div>
+
+                        
+
                     </div>
 
                 </div>
