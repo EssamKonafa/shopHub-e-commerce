@@ -39,8 +39,8 @@ function page() {
     }, [])
 
     return (
-        <div className='p-5'>
-            <div className='flex border p-5 gap-8 '>
+        <div className='p-5 bg-white m-5'>
+            <div className='flex p-5 gap-8 '>
 
                 <div>
                     <img
@@ -55,10 +55,10 @@ function page() {
                         <h1 className='text-2xl font-semibold border-b-2'>{product.title}</h1>
                         <p>love</p>
                     </span>
-                    <h5 className='font-semibold'>{product.price}</h5>
+                    <h5 className='font-semibold '>price: {product.price}$</h5>
                     <p>{product.description}</p>
 
-                    <button className='bg-gray-200 rounded-md p-2 hover:bg-black hover:text-white transition duration-300 '>
+                    <button className='bg-gray-200 rounded-md p-2 mt-2 hover:bg-black hover:text-white transition duration-300 '>
                         add to cart
                     </button>
 

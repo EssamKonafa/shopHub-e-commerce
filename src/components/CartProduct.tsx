@@ -29,7 +29,7 @@ function CartProduct({ CProduct }) {
 
                         <div>
 
-                            <p className='font-bold'>{CProduct.title}</p>
+                            <p className='font-bold '>{CProduct.title}</p>
 
                             <div className='flex gap-4 pt-2'>
                                 {/* <p><FormatListNumberedIcon/>quantity</p> */}

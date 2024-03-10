@@ -6,7 +6,6 @@ import Product from './Product'
 function Products() {
 
     const products:ProductType[] = useGetProducts()
-console.log(products);
 
     return (
         <>

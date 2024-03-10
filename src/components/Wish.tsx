@@ -27,7 +27,7 @@ function Wish({ wishes }) {
           className='object-contain w-52 h-52 mx-auto '
         />
 
-        <div className='font-semibold text-center py-2'>
+        <div className='font-semibold text-center py-1 line-clamp-1'>
           {wishes.title}
         </div>
 

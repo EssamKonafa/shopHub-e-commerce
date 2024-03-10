@@ -7,7 +7,6 @@ function Page() {
 
     const wishList = useSelector((state) => state.wishList.wishList)
     const [wish, setWish] = useState([])
-    console.log(wish);
 
     function getWishList() {
         setWish(wishList)

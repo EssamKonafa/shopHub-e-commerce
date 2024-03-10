@@ -6,6 +6,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import WishListToggle from './wishListToggle';
 
 //عايز اقلل الكود ابقي شوف ازاي نعملها علي دي
 interface ProductProps {
@@ -43,7 +44,7 @@ function Product({ product }: ProductProps) {
         <div className='bg-white' >
 
 
-            <p className='p-4 absolute' onClick={addWish}><FavoriteBorderOutlinedIcon /></p>
+            <WishListToggle product={product}/>
 
             <div className='p-4  cursor-pointer ' onClick={() => navigate(product.id)} >
                 <img
