@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/redux/provider.tsx", "src/redux/store.ts", "postcss.config.js", "firebase/auth.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/redux/provider.tsx", "src/redux/store.ts", "postcss.config.js", "firebase/auth.js", "src/app/cart/page.jsx"],
   "exclude": ["node_modules"]
 }

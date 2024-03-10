@@ -8,23 +8,15 @@ import Swal from 'sweetalert2';
 
 function Page() {
 
-  interface Product{
-    id:number,
-    price:number,
-  }
-
-  interface CartProductProps{
-    CProduct:Product
-  }
 
   const { currentUser } = useAuth();
 
-  const selectedProduct = useSelector((state:any) => state.cart.products);
+  const selectedProduct = useSelector((state) => state.cart.products);
 
-  const [cartProduct, setCartProducts] = useState<Product[]>([]);
-  const [showCheckoutMessage, setShowCheckoutMessage] = useState<boolean>(false);
-  const [showSignInMessage, setShowSignInMessage] = useState<boolean>(false);
-  const [subtotal, setSubtotal] = useState<number>(0);
+  const [cartProduct, setCartProducts] = useState([]);
+  const [showCheckoutMessage, setShowCheckoutMessage] = useState(false);
+  const [showSignInMessage, setShowSignInMessage] = useState(false);
+  const [subtotal, setSubtotal] = useState(0);
 
   const calculateSubtotal = () => {
     const total = cartProduct.reduce((acc, product) => {
