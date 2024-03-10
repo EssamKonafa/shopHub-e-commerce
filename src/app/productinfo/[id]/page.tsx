@@ -22,13 +22,17 @@ interface ProductInfo {
     }
 }
 
+interface ProductInfoProps {
+    product: ProductInfo
+}
+
 function page() {
 
     const params = useParams()
     const id = params.id
 
-    const [product, setProduct] = useState({})
-    const [loader, setLoader] = useState(true)
+    const [product, setProduct] = useState<ProductInfo | {}>({})
+    const [loader, setLoader] = useState<boolean>(true)
 
     const getProductInfo = async () => {
         try {
@@ -43,7 +47,7 @@ function page() {
     }
 
     const dispatch = useDispatch()
-    function addProductCart(product) {
+    function addProductCart(product: ProductInfo) {
         dispatch(addToCart(product))
         showAlert()
     }
@@ -58,7 +62,7 @@ function page() {
     const showStars = () => {
         const stars = [];
         const totalStars = 5;
-        const fullStars = Math.min(Math.floor(product.rating.rate), totalStars);
+        const fullStars = Math.min(Math.floor(product.rating?.rate || 0), totalStars);
 
         for (let i = 0; i < totalStars; i++) {
             if (i < fullStars) {
@@ -91,7 +95,7 @@ function page() {
 
     return (
         <>
-                
+
             <div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 p-5 bg-white m-5 shadow-md mb-20'>
 
                 <div className='mx-auto'>
