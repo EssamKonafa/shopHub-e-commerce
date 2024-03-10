@@ -6,7 +6,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import WishListToggle from './wishListToggle';
+import WishListToggle from '../components/WishListToggle';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Swal from 'sweetalert2';
