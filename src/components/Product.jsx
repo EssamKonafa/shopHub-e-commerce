@@ -6,26 +6,13 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import WishListToggle from '../components/WishListToggle';
+import WishListToggle from './WishListToggle';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Swal from 'sweetalert2';
 
-//عايز اقلل الكود ابقي شوف ازاي نعملها علي دي
-interface ProductProps {
-    product: {
-        id: number,
-        title: string,
-        image: string
-        category: string,
-        description: string,
-        price: number,
-        rating: { rate: number; count: number },
-    }
-}
 
-
-function Product({ product }: ProductProps) {
+function Product({ product }) {
 
     const router = useRouter()
 

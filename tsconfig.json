@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/redux/provider.tsx", "src/redux/store.ts", "postcss.config.js", "firebase/auth.js", "src/app/cart/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/redux/provider.jsx", "src/redux/store.js", "postcss.config.js", "firebase/auth.js", "src/app/cart/page.jsx", "src/app/productinfo/[id]/page.jsx", "src/app/signin/page.jsx", "src/components/Product.jsx", "src/components/WishListToggle.jsx", "src/components/Wish.jsx", "src/components/Header.jsx", "src/components/CartProduct.jsx", "src/context/authContext/index.jsx", "src/redux/slices/cartSlice.js", "src/redux/slices/wishListSlice.js", "src/components/Products.jsx", "src/components/Banner.jsx", "src/components/Footer.jsx", "src/components/Loader.jsx", "src/app/signup/page.jsx", "src/app/wishlist/page.jsx", "src/app/layout.jsx", "src/app/page.jsx"],
   "exclude": ["node_modules"]
 }
