@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { Providers } from '../redux/provider'
 import { AuthProvider } from "@/context/authContext";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,9 @@ export default function RootLayout({
               <Header />
             </div>
 
-            {children}
+            <div className="component">{children}</div>
+
+            <Footer/>
 
           </AuthProvider>
 

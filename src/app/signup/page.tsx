@@ -123,9 +123,9 @@ function page() {
                 </form>
             </div>
 
-            <div className='footer border-t text-center mt-auto fixed bottom-0 w-full p-2'>
+            {/* <div className='footer border-t text-center mt-auto fixed bottom-0 w-full p-2'>
                 <p>©2024, shopHub.com, Inc.</p>
-            </div>
+            </div> */}
         </>
     )
 }
