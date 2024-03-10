@@ -20,9 +20,9 @@ function WishListToggle({ product }) {
     };
 
     return (
-        <p className='p-4 absolute' onClick={toggleWishlist}>
+        <div className='p-4' onClick={toggleWishlist}>
             {isWished ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
-        </p>
+        </div>
     );
 }
 

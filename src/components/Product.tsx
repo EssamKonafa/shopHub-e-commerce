@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import WishListToggle from './wishListToggle';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 //عايز اقلل الكود ابقي شوف ازاي نعملها علي دي
 interface ProductProps {
@@ -35,18 +37,29 @@ function Product({ product }: ProductProps) {
         dispatch(addToCart(product))
     }
 
-    const wishList = useSelector((state) => state.wishList.wishList)
-    function addWish() {
-        dispatch(addToWish(product))
-    }
+    const renderStars = () => {
+        const stars = [];
+        const fullStars = Math.floor(product.rating.rate);
+
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(<StarIcon key={i} style={{ color: '#FFFF66',fontSize:'20px'}} />);
+        }
+
+        if (product.rating.rate - fullStars >= 0.5) {
+            stars.push(<StarBorderIcon key={fullStars} style={{fontSize:'20px'}} />);
+        }
+
+        return stars;
+    };
 
     return (
-        <div className='bg-white' >
+        <div className='bg-white relative z-10 shadow-md' >
 
+            <div className='cursor-pointer border-2 border-black border-rounded-full'>
+                <WishListToggle product={product} />
+            </div>
 
-            <WishListToggle product={product}/>
-
-            <div className='p-4  cursor-pointer ' onClick={() => navigate(product.id)} >
+            <div className='p-4  cursor-pointer my-2' onClick={() => navigate(product.id)} >
                 <img
                     className='object-contain w-52 h-52 mx-auto '
                     src={product.image}
@@ -56,7 +69,7 @@ function Product({ product }: ProductProps) {
                 <p className='font-semibold text-center line-clamp-1'>{product.title}</p>
 
                 <p className='pt-2'>voters:{product.rating.count}</p>
-                <p>rate:{product.rating.rate}</p>
+                <p>rate:{renderStars()}</p>
                 <p className='font-bold'>price: {product.price} $</p>
 
             </div>

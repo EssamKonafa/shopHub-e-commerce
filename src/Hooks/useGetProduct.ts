@@ -36,6 +36,6 @@ export function useGetProducts() {
         handleGetProducts()
     }, [])
 
-    return products
+    return {products,loader}
 
 }
