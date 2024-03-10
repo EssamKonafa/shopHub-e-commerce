@@ -17,11 +17,11 @@ export const signInWithE_PW = async (email, password) => {
     }
 };
 
-export const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider()
-    const result = await signInWithPopup(auth, provider)
-    return result
-}
+// export const signInWithGoogle = async () => {
+//     const provider = new GoogleAuthProvider()
+//     const result = await signInWithPopup(auth, provider)
+//     return result
+// }
 
 export const handleSignOut = async() => {
     try{
@@ -33,16 +33,16 @@ export const handleSignOut = async() => {
     }
 }
 
-export const passwordReset = (email) => {
-    return sendPasswordResetEmail(auth, email)
-}
+// export const passwordReset = (email) => {
+//     return sendPasswordResetEmail(auth, email)
+// }
 
-export const passwordChange = (password) => {
-    return updatePassword(auth.currentUser, password)
-}
+// export const passwordChange = (password) => {
+//     return updatePassword(auth.currentUser, password)
+// }
 
-export const sendEmailVariation = () => {
-    return sendEmailVariation(auth, currentUser, {
-        url: `${window.location.origin}/`
-    })
-}
+// export const sendEmailVariation = () => {
+//     return sendEmailVariation(auth, currentUser, {
+//         url: `${window.location.origin}/`
+//     })
+// }
