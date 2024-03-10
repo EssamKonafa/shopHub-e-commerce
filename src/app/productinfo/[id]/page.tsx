@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import Link from 'next/link'
 
 interface ProductInfo {
     product: {
