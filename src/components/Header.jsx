@@ -110,11 +110,11 @@ function Header() {
 
 
 
-                    <div className=' text-center font-semibold gap-4 md:flex flex-row text-xs md:mx-10'>
+                    <div className='pl-14 text-center font-semibold gap-4 md:flex flex-row text-xs '>
 
 
-                    <div>
-                            <div className='text-sm font-semibold pl-2 '>
+                        <div>
+                            <div className='text-sm font-semibold  '>
                                 {currentUser ?
                                     (<>
                                         <div className=''>
@@ -129,9 +129,9 @@ function Header() {
                                     (<>
                                         <div className=''>
                                             <p>Hello</p>
-                                            <div>
-                                            <Link className='hover:text-blue-600' href={'/signin'}>sign in</Link>
-                                            </div>
+                                            <p>
+                                                <Link className='hover:text-blue-600' href={'/signin'}>sign in</Link>
+                                            </p>
                                         </div>
                                     </>)}
                             </div>
@@ -154,7 +154,7 @@ function Header() {
                             </Link>
                         </div>
 
-                        
+
 
                     </div>
 
