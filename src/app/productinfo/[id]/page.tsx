@@ -5,6 +5,10 @@ import { addToCart } from '@/redux/slices/cartSlice'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2'
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Link from 'next/link'
 
 interface ProductInfo {
     product: {
@@ -23,7 +27,7 @@ function page() {
     const params = useParams()
     const id = params.id
 
-    const [Product, setProduct] = useState({})
+    const [product, setProduct] = useState({})
     const [loader, setLoader] = useState(true)
 
     const getProductInfo = async () => {
@@ -41,7 +45,30 @@ function page() {
     const dispatch = useDispatch()
     function addProductCart(product) {
         dispatch(addToCart(product))
+        showAlert()
     }
+    function showAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'added to cart',
+            text: 'The product has been added to your cart successfully!'
+        })
+    }
+
+    const showStars = () => {
+        const stars = [];
+        const totalStars = 5;
+        const fullStars = Math.min(Math.floor(product.rating.rate), totalStars);
+
+        for (let i = 0; i < totalStars; i++) {
+            if (i < fullStars) {
+                stars.push(<StarIcon key={i} style={{ color: '#FFFF33', fontSize: '20px' }} />);
+            } else {
+                stars.push(<StarBorderIcon key={i} style={{ fontSize: '20px' }} />);
+            }
+        }
+        return stars;
+    };
 
     useEffect(() => {
         getProductInfo()
@@ -63,37 +90,47 @@ function page() {
     }
 
     return (
-        <div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 p-5 bg-white m-5 shadow-md'>
+        <>
+                
+            <div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 p-5 bg-white m-5 shadow-md mb-20'>
 
-            <div>
-                <div className='pb-10'>
-                    <WishListToggle product={Product} />
-                </div>
-                <img
-                    src={Product.image}
-                    className=' w-auto h-auto'
-                    alt='product image'
-                />
-            </div>
-
-            <div className='flex p-5 gap-8 '>
-                <div>
-                    <span className='flex gap-5 pt-10'>
-                        <h1 className='text-2xl font-semibold border-b-2'>{Product.title}</h1>
-                    </span>
-
-                    <h5 className='font-normal py-10 text-2xl'>price: {Product.price}$</h5>
-
-                    <p className='pt-5'>{Product.description}</p>
-
-                    <button className='bg-gray-200 rounded-md p-2 mt-2 hover:bg-black hover:text-white transition duration-300 ' onClick={() => addProductCart(Product)}>
-                        add to cart
-                    </button>
-
+                <div className='mx-auto'>
+                    <div className='pb-10'>
+                        <WishListToggle product={product} />
+                    </div>
+                    <img
+                        src={product.image}
+                        className=' w-96 h-96 object-contain '
+                        alt='product image'
+                    />
                 </div>
 
+                <div className='flex p-5 gap-8 '>
+                    <div>
+                        <div className=' gap-5 pt-10 pb-2 border-gray-400 items-center '>
+                            <h1 className='text-2xl'>{product.title}</h1>
+                            <div className='pt-2'>
+                                <p>{product.rating.count} ratings</p>
+                                <p>{product.rating.rate} {showStars()}</p>
+                            </div>
+                        </div>
+
+                        <h5 className='font-normal py-5 text-2xl'>price: {product.price}$</h5>
+
+
+                        <p className='pt-5'>{product.description}</p>
+
+                        <button className='bg-gray-200 rounded-md p-2 mt-2 hover:bg-black hover:text-white transition duration-300 ' onClick={() => addProductCart(product)}>
+                            add to cart
+                        </button>
+
+                    </div>
+
+                </div>
             </div>
-        </div>
+
+        </>
+
     )
 }
 

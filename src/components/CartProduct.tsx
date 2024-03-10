@@ -29,12 +29,12 @@ function CartProduct({ CProduct }) {
 
                         <div>
 
-                            <p className='font-bold '>{CProduct.title}</p>
+                            <p className='font-semibold '>{CProduct.title}</p>
 
                             <div className='flex gap-4 pt-2'>
                                 {/* <p><FormatListNumberedIcon/>quantity</p> */}
-                                <button onClick={()=> removeProduct(CProduct.id)}><DeleteForeverOutlinedIcon/>delete</button>
-                                <p><LoyaltyOutlinedIcon/>add to wishlist</p>
+                                <button className='hover:text-red-500' onClick={()=> removeProduct(CProduct.id)}><DeleteForeverOutlinedIcon/>remove</button>
+                                {/* <p><LoyaltyOutlinedIcon/>add to wishlist</p> */}
                             </div>
 
                         </div>

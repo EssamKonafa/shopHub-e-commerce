@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAuth } from '@/context/authContext';
+import Swal from 'sweetalert2';
 
 function Page() {
   const { currentUser } = useAuth();
@@ -28,10 +29,19 @@ function Page() {
   const handleCheckout = () => {
     if (currentUser) {
       setShowCheckoutMessage(true);
+      showAlert()
     } else {
       setShowSignInMessage(true);
     }
   };
+
+  function showAlert() {
+    Swal.fire({
+      icon: 'success',
+      title: 'purchased successfully!',
+      text: 'Thank you for your purchase! Your order has been processed.',
+    })
+  }
 
   useEffect(() => {
     theProducts();
@@ -87,13 +97,13 @@ function Page() {
           </div>
         )}
 
-        {showCheckoutMessage && (
+        {/* {showCheckoutMessage && (
           <div className='flex justify-center items-center border-t-2 pt-4 font-bold'>
             <p>
               Thank you for your purchase! Your order has been processed.
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

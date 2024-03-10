@@ -10,6 +10,7 @@ import { useAuth } from '../context/authContext'
 import { handleSignOut } from '../../firebase/auth'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
 
 function Header() {
 
@@ -44,6 +45,14 @@ function Header() {
 
     function handleResultNavigate(id) {
         router.push(`productinfo/${id}`)
+    }
+
+    function showAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'sign out',
+            text: 'Signed out successfully!'
+        })
     }
 
     useEffect(() => {
@@ -107,14 +116,14 @@ function Header() {
 
                                         Hello, {currentUser.email.length > 5 ? `${currentUser.email.substring(0, 5)}` : currentUser.email}
                                     </p>
-                                    <button onClick={() => handleSignOut()}><p className='hover:text-red-600'>sign out</p></button>
+                                    <button onClick={() => handleSignOut().then(()=>showAlert())}><p className='hover:text-red-600'>sign out</p></button>
                                 </div>
                             </>)
                             :
                             (<>
                                 <div>
                                     <p>Hello</p>
-                                    <Link href={'/signin'}>sign in</Link>
+                                    <Link className='hover:text-blue-600' href={'/signin'}>sign in</Link>
                                 </div>
                             </>)}
                     </div>

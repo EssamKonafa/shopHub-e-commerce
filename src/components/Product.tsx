@@ -9,6 +9,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import WishListToggle from './wishListToggle';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import Swal from 'sweetalert2';
 
 //عايز اقلل الكود ابقي شوف ازاي نعملها علي دي
 interface ProductProps {
@@ -35,31 +36,64 @@ function Product({ product }: ProductProps) {
     const dispatch = useDispatch()
     function addProductCart() {
         dispatch(addToCart(product))
+        showAlert()
+    }
+
+    function showAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'added to cart',
+            text: 'The product has been added to your cart successfully!',
+            toast: true,
+            showConfirmButton: false,
+            timer: 3000,
+        })
+    }
+
+    function showAddAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'add to wishList',
+            text: 'The product has been added to wishList successfully!',
+            showConfirmButton: false,
+            timer: 3000,
+            toast: true,
+        })
+    }
+    function showRemoveAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'remove from wishList',
+            text: 'The product has been removed from wishList successfully!',
+            showConfirmButton: false,
+            timer: 3000,
+            toast: true,
+        })
     }
 
     const renderStars = () => {
         const stars = [];
-        const fullStars = Math.floor(product.rating.rate);
+        const totalStars = 5;
+        const fullStars = Math.min(Math.floor(product.rating.rate), totalStars);
 
-        for (let i = 0; i < fullStars; i++) {
-            stars.push(<StarIcon key={i} style={{ color: '#FFFF66',fontSize:'20px'}} />);
+        for (let i = 0; i < totalStars; i++) {
+            if (i < fullStars) {
+                stars.push(<StarIcon key={i} style={{ color: '#FFFF33', fontSize: '20px' }} />);
+            } else {
+                stars.push(<StarBorderIcon key={i} style={{ fontSize: '20px' }} />);
+            }
         }
-
-        if (product.rating.rate - fullStars >= 0.5) {
-            stars.push(<StarBorderIcon key={fullStars} style={{fontSize:'20px'}} />);
-        }
-
         return stars;
     };
 
     return (
-        <div className='bg-white relative z-10 shadow-md' >
+        <div className='bg-white relative z-10 shadow-md border-t-4 border-black' >
 
-            <div className='cursor-pointer border-2 border-black border-rounded-full'>
-                <WishListToggle product={product} />
+            <div className='cursor-pointer '>
+                <WishListToggle product={product} showAddAlert={showAddAlert} showRemoveAlert={showRemoveAlert} />
             </div>
 
-            <div className='p-4  cursor-pointer my-2' onClick={() => navigate(product.id)} >
+            <div className='p-2 cursor-pointer my-2' onClick={() => navigate(product.id)} >
                 <img
                     className='object-contain w-52 h-52 mx-auto '
                     src={product.image}
@@ -68,8 +102,8 @@ function Product({ product }: ProductProps) {
 
                 <p className='font-semibold text-center line-clamp-1'>{product.title}</p>
 
-                <p className='pt-2'>voters:{product.rating.count}</p>
-                <p>rate:{renderStars()}</p>
+                <p className='pt-2'>{product.rating.count} ratings</p>
+                <p>{product.rating.rate} {renderStars()}</p>
                 <p className='font-bold'>price: {product.price} $</p>
 
             </div>
