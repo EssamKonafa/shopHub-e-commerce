@@ -1,6 +1,6 @@
 'use client'
 import Loader from '@/components/Loader'
-import WishListToggle from '@/components/wishListToggle'
+// import WishListToggle from '@/components/wishListToggle'
 import { addToCart } from '@/redux/slices/cartSlice'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -98,7 +98,7 @@ function page() {
 
                 <div className='mx-auto'>
                     <div className='pb-10'>
-                        <WishListToggle product={product} />
+                        {/* <WishListToggle product={product} /> */}
                     </div>
                     <img
                         src={product.image}
