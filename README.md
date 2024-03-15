@@ -1,4 +1,4 @@
-## live site : https://shop-hub-beta.vercel.app/
+##  live site : https://shop-hub-beta.vercel.app/
 
 **eCommerce Project Highlights:**
 
