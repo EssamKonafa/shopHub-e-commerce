@@ -1,7 +1,7 @@
 ##  live site : https://shop-hub-beta.vercel.app/
 
 **eCommerce Project Highlights:**   
-
+ 
 1. **User Authentication:**
    - Implemented a seamless signup/signin process for enhanced user experience.
 
